@@ -1,62 +1,104 @@
 package no.capra.person;
 
-import com.fasterxml.classmate.GenericType;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.JsonPath;
 import no.capra.person.domain.Person;
-import no.capra.person.endpoint.PersonResource;
 import no.capra.person.repository.PersonRepository;
-import org.glassfish.jersey.test.JerseyTest;
+import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Matchers;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Application;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
-import java.util.List;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+@WebAppConfiguration
+@ContextConfiguration(classes = ApplicationConfig.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ActiveProfiles("test")
+public class PersonResourceIntegrationTest {
 
-public class PersonResourceIntegrationTest extends JerseyTest {
+    private MockMvc mockMvc;
 
+    @Autowired
+    private WebApplicationContext context;
+
+    @Autowired
     PersonRepository personRepository;
-
-    @Override
-    protected Application configure() {
-        System.setProperty("spring.profiles.default", "test");
-        ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
-        personRepository = context.getBean(PersonRepository.class);
-        return new JerseyConfig().property("contextConfig", context);
-    }
 
     @Before
     public void setup() {
         personRepository.deleteAll();
+        mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
     }
 
     @Test
-    public void smokeTest() {
-        Response response = target("person").request().post(Entity.json(new Person("Ola", "Normann")));
-        Person personSaved = response.readEntity(Person.class);
-        Person person = target("person").path(personSaved.getId()).request().get(Person.class);
-        assertEquals("Ola", person.getFirstname());
-        assertEquals("Normann", person.getLastname());
+    public void testSkalOpprettePerson() throws Exception {
+        String id = opprettPerson();
+        assertNotNull(id);
+    }
 
-        target("person").path(personSaved.getId()).request().delete();
-        List personListe = target("person").request().get(List.class);
-        assertEquals(0, personListe.size());
+    @Test
+    public void testSkalHentePerson() throws Exception {
+        String id = opprettPerson();
+        mockMvc.perform(get("/person/" + id))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(id)));
+    }
+
+    @Test
+    public void testSkalOppdaterePerson() throws Exception {
+        String id = opprettPerson();
+        Person person = new Person("Jens", "Normann");
+        person.setId(id);
+        mockMvc.perform(put("/person")
+                .content(convertObjectToJsonBytes(person))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(id)))
+                .andExpect(jsonPath("$.firstname", is("Jens")));
+    }
+
+    @Test
+    public void testSkalSlettePerson() throws Exception {
+        String id = opprettPerson();
+        mockMvc.perform(delete("/person/" + id))
+                .andExpect(status().isOk());
+        mockMvc.perform(get("/person/" + id))
+                .andExpect(status().isOk())
+                .andExpect(content().string(""));
+    }
+
+    private String opprettPerson() throws Exception {
+        MvcResult result = mockMvc.perform(post("/person")
+                .content(convertObjectToJsonBytes(new Person("Ola", "Normann")))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andReturn();
+        return JsonPath.read(result.getResponse().getContentAsString(), "$id");
+    }
+
+    public static byte[] convertObjectToJsonBytes(Object object) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        return mapper.writeValueAsBytes(object);
     }
 
 }

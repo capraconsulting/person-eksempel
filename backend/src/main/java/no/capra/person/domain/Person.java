@@ -34,4 +34,15 @@ public class Person implements Serializable {
         return lastname;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 }

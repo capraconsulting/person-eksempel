@@ -1,0 +1,29 @@
+
+  <script type="text/ng-template" id="deletePersonModal.html">
+    <h3>Are you sure you you would like to delete user {{firstname}} {{lastname}}?</h3>
+    <button class="button radius" ng-click="ok()">OK</button>
+    <a class="close-reveal-modal" ng-click="cancel()">&#215;</a>
+  </script>
+
+<div class="row" ng-controller="listPersonController" >
+  	<div class="large-10 large-offset-1 columns" >
+  		<h1>Persons</h1>
+  		<table>
+		  	<thead>
+			    <tr>
+			      <th>Firstname</th>
+			      <th>Lastname</th>
+			      <th colspan="2"></th>
+			    </tr>
+		  	</thead>
+		  	<tbody>
+			    <tr ng-repeat="p in persons">
+			      	<td>{{p.firstname}}</td>
+			  		<td>{{p.lastname}}</td>
+			  		<td><a href="#/register_person/{{p.id}}" class="tiny button radius" >Edit</a></td>
+			  		<td><a class="tiny button alert radius" ng-click="openDeleteModal(p.id, p.firstname, p.lastname, $index)" >Delete</a></td>
+			    </tr>  
+		  	</tbody>
+		</table>
+	</div>
+</div>

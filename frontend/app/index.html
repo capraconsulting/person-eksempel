@@ -1,0 +1,48 @@
+<!doctype html>
+<html>  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Hyttebooking</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="styles/hyttebooking.css">
+    <link rel="shortcut icon" href="favicon.ico" />
+  </head>
+  <body ng-app="hyttebookingApp">
+    <div ng-controller="topBarController">
+        <header >
+            <nav class="top-bar" data-topbar>
+                <ul class="title-area">
+                    <li class="name">
+                      <h1><a href="/">People</a></h1>
+                    </li>
+                </ul>
+                <section class="top-bar-section">
+                <ul class="left show-for-large-up">
+                    <li ng-class="{active: $route.current.activetab == 'list_persons'}" ><a href="#/list_persons">List Persons</a></li>
+                    <li ng-class="{active: $route.current.activetab == 'register_person'}"  ><a href="#/register_person">Register Persons</a></li>
+                </ul>
+                </section>
+            </nav>
+        </header>
+        <div class="row">
+            <div class="large-10 columns">
+                <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+            </div>
+        </div>
+    </div>
+    <div class="container" ng-view=""></div>
+
+    <script src="vendor/scripts/jquery.js"></script>
+    <script src="vendor/scripts/angular.js"></script>
+    <script src="vendor/scripts/angular-route.js"></script>
+    <script src="vendor/scripts/mm-foundation.js"></script>
+     <script src="vendor/scripts/mm-foundation-tpls.js"></script>
+
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/controllers.js"></script>
+    <script src="scripts/services/services.js"></script>
+    </body>
+</html>

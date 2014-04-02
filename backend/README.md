@@ -1,7 +1,7 @@
 # Oppsett
 
 * Installer MongoDB
-    * Last nd: http://www.mongodb.org/downloads
+    * Last ned: http://www.mongodb.org/downloads
     * Installasjonsinstrukser http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/ eller http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/
 * Start MongoDB (mongod)
 * Installer Gradle: http://www.gradle.org/downloads

@@ -2,7 +2,7 @@
 
 * Installer git
 * Logg inn på https://stash.capraconsulting.no 
-	* Gå til "Manage account" (trykk først på profilbildet ditt øverst til høyre)
+	* Gå til "Manage account" (trykk først på profilbildet ditt øverst til høyre på siden)
 	* Velg SSH-keys
 	* Add din public ssh-key til Stash
 		* Generer ssh-keys på maskinen din (ssh-keygen) og gå til .ssh katalogen og kopier ut innholdet av id_rsa.pub (pass på å ikke få med linebreaks, alt skal være på en linje)

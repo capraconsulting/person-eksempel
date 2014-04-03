@@ -1,4 +1,4 @@
-# Oppsett av applikasjon
+# Oppsett av applikasjonen
 
 * Installer git
 * Logg inn på https://stash.capraconsulting.no 

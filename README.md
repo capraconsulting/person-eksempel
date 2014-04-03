@@ -9,7 +9,7 @@
 * Sjekk ut git-prosjektet "bibliotek".
 	* Bruk ssh-adressen som man får ved å trykke Clone øverst til høyre i bildet. (git clone <ssh-adresse>)
 
-Konfigurer opp git med brukernavn og mail. Her er Mortens oppsett:
+Konfigurer opp git med brukernavn og e-mail. Her er Mortens oppsett:
 ```
 git config --global user.name "Morten Tangen"
 git config --global user.email "mta@capraconsulting.no"

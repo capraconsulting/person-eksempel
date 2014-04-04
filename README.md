@@ -1,4 +1,4 @@
-# Oppsett av applikasjonen
+# Oppsett av applikasjon
 
 * Installer git
 * Logg inn på https://stash.capraconsulting.no 
@@ -7,7 +7,7 @@
 	* Add din public ssh-key til Stash
 		* Generer ssh-keys på maskinen din (ssh-keygen) og gå til .ssh katalogen og kopier ut innholdet av id_rsa.pub (pass på å ikke få med linebreaks, alt skal være på en linje)
 * Sjekk ut git-prosjektet "bibliotek".
-	* Bruk ssh-adressen som man får ved å trykke Clone øverst til høyre i bildet. (git clone <ssh-adresse>)
+	* Bruk ssh-adressen som man får ved å trykke clone øverst til høyre i bildet. (git clone <ssh-adresse>)
 
 Konfigurer opp git med brukernavn og e-mail. Her er Mortens oppsett:
 ```

@@ -13,6 +13,7 @@ public class Person implements Serializable {
     @Id
     private String id;
     private String firstname, lastname;
+    private long fnr;
 
     public Person() {
     }
@@ -44,5 +45,17 @@ public class Person implements Serializable {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public long getFnr() {
+        return fnr;
+    }
+
+    public void setFnr(long fnr) {
+        this.fnr = fnr;
+    }
+
+    public String getFulltNavn() {
+        return firstname + " " + lastname;
     }
 }

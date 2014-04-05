@@ -6,6 +6,7 @@ import com.jayway.jsonpath.JsonPath;
 import no.capra.person.domain.Person;
 import no.capra.person.repository.PersonRepository;
 import org.hamcrest.CoreMatchers;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,6 +49,11 @@ public class PersonResourceIntegrationTest {
     public void setup() {
         personRepository.deleteAll();
         mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+    }
+
+    @After
+    public void etterHVerTest() {
+        personRepository.deleteAll();
     }
 
     @Test

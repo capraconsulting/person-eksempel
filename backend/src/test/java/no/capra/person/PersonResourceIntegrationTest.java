@@ -104,7 +104,9 @@ public class PersonResourceIntegrationTest {
     public static byte[] convertObjectToJsonBytes(Object object) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        return mapper.writeValueAsBytes(object);
+        byte[] bytes = mapper.writeValueAsBytes(object);
+        System.out.println(new String(bytes));
+        return bytes;
     }
 
 }

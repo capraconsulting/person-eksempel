@@ -10,3 +10,5 @@ classes/
 hyttebooking.css
 *.iml
 .gradle/
+*.ipr
+*.iws

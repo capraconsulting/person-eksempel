@@ -3,7 +3,6 @@ package no.capra.person.endpoint;
 import no.capra.person.domain.Person;
 import no.capra.person.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +16,7 @@ public class PersonResource {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Person get(@PathVariable String id) {
-        return personRepository.findOne(id);
+        return personRepository.findById(id);
     }
 
     @RequestMapping(method = RequestMethod.GET)

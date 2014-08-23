@@ -34,7 +34,7 @@ public class PersonRepositoryIntegrationTest {
     public void testSkalOpprettePersonIMongoRepo() {
         Person person = personRepository.save(new Person("test", "testersen"));
         Assert.assertNotNull(person.getId());
-        Assert.assertEquals(1, personRepository.count());
+        Assert.assertEquals(1, personRepository.findAll().size());
     }
 
 

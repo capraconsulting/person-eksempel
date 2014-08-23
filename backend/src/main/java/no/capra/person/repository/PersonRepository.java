@@ -9,8 +9,16 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Component
-public interface PersonRepository extends MongoRepository<Person, String> {
+public interface PersonRepository {
 
-    List<Person> findByLastname(@Param("lastname") String lastname);
+    Person findById(String id);
+
+    List<Person> findAll();
+
+    Person save(Person person);
+
+    void delete(String id);
+
+    void deleteAll();
 
 }

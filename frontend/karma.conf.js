@@ -10,7 +10,7 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
 
     // list of files / patterns to load in the browser
-    files: [      
+    files: [
       'app/vendor/scripts/angular.js',
       'app/vendor/scripts/angular-mocks.js',
       'app/vendor/scripts/angular-route.js',
@@ -18,7 +18,7 @@ module.exports = function(config) {
       'app/vendor/scripts/mm-foundation-tpls.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
-      'test/spec/**/*.js'
+      'test/unit/**/*.js'
     ],
 
     // list of files / patterns to exclude
@@ -31,12 +31,6 @@ module.exports = function(config) {
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
     logLevel: config.LOG_INFO,
 
-
-    plugins: [
-      'karma-jasmine',
-      'karma-coverage',
-      'karma-phantomjs-launcher'
-    ],
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,

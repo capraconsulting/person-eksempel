@@ -3,6 +3,7 @@ dist
 .tmp
 .sass-cache
 app/bower_components
+bower_components
 .idea
 build/
 classes/
@@ -12,3 +13,4 @@ hyttebooking.css
 .gradle/
 *.ipr
 *.iws
+npm-debug.log

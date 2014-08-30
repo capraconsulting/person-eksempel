@@ -2,6 +2,7 @@ package no.capra.person.endpoint;
 
 import no.capra.person.domain.Person;
 import no.capra.person.repository.PersonRepository;
+import no.capra.person.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,9 @@ public class PersonResource {
 
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    private PersonService personService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Person get(@PathVariable String id) {
@@ -26,7 +30,7 @@ public class PersonResource {
 
     @RequestMapping(method = RequestMethod.POST)
     public Person create(@RequestBody Person person) {
-        return personRepository.save(person);
+        return personService.save(person);
     }
 
     @RequestMapping(method = RequestMethod.PUT)

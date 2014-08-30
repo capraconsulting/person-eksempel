@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
@@ -17,6 +18,9 @@ public class Person implements Serializable {
     private String id;
     private String firstname, lastname;
     private long fnr;
+
+//    @DBRef
+    private Address address;
 
     public Person() {
     }
@@ -56,6 +60,14 @@ public class Person implements Serializable {
 
     public void setFnr(long fnr) {
         this.fnr = fnr;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Transient

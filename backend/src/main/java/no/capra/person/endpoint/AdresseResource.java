@@ -14,7 +14,13 @@ public class AdresseResource {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public DSFAdresse get(@PathVariable String id) {
-        return new DSFAdresse("Karl Johansgt 6", "0154", "Oslo");
+        Long longId = Long.valueOf(id);
+        if (longId < 10000000000L) {
+            return new DSFAdresse("Claude Monets gate 22", "1337", "Sandvika");
+        } else if (longId < 20000000000L) {
+            return new DSFAdresse("Nedre Møllenbergsgate 22", "7014", "Trondheim");
+        }
+        return new DSFAdresse("Karl Johans gate 6", "0154", "Oslo");
     }
 
 }

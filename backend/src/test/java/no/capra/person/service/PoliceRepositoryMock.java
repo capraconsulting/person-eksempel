@@ -1,8 +1,8 @@
 package no.capra.person.service;
 
-import no.capra.person.repository.PoliceService;
+import no.capra.person.repository.PoliceRepository;
 
-public class PoliceServiceMock implements PoliceService {
+public class PoliceRepositoryMock implements PoliceRepository {
 
     private boolean alertWasInvoked;
 

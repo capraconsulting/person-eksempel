@@ -1,10 +1,6 @@
 package no.capra.person.service;
 
-import no.capra.person.domain.Address;
 import no.capra.person.domain.Person;
-import no.capra.person.repository.FolkeregisterRepository;
-import no.capra.person.repository.PersonRepository;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,19 +11,19 @@ public class PersonServiceImplTest {
     PersonServiceImpl personService;
     FolkeregisterRepositoryMock folkeregisterRepositoryMock;
     PersonRepositoryMock personRepositoryMock;
-    PoliceServiceMock policeServiceMock;
+    PoliceRepositoryMock policeServiceMock;
     Person person;
 
     @Before
     public void setup() {
         folkeregisterRepositoryMock = new FolkeregisterRepositoryMock();
         personRepositoryMock = new PersonRepositoryMock();
-        policeServiceMock = new PoliceServiceMock();
+        policeServiceMock = new PoliceRepositoryMock();
 
         personService = new PersonServiceImpl();
         personService.setFolkeregisterRepository(folkeregisterRepositoryMock);
         personService.setPersonRepository(personRepositoryMock);
-        personService.setPoliceService(policeServiceMock);
+        personService.setPoliceRepository(policeServiceMock);
 
         person = new Person("Ola", "Normann");
         person.setFnr(31057831777l);

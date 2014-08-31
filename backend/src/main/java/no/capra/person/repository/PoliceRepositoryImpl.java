@@ -1,6 +1,9 @@
 package no.capra.person.repository;
 
-public class PoliceServiceImpl implements PoliceService {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class PoliceRepositoryImpl implements PoliceRepository {
     @Override
     public void alert(long fnr) {
         // Tilkaller politiet

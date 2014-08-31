@@ -5,7 +5,7 @@ import no.capra.person.domain.Person;
 import no.capra.person.repository.FolkeregisterAddress;
 import no.capra.person.repository.FolkeregisterRepository;
 import no.capra.person.repository.PersonRepository;
-import no.capra.person.repository.PoliceService;
+import no.capra.person.repository.PoliceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class PersonServiceImpl implements PersonService {
     private FolkeregisterRepository folkeregisterRepository;
 
     @Autowired
-    private PoliceService policeService;
+    private PoliceRepository policeRepository;
 
     /**
      * Oppgave 1:
@@ -27,7 +27,7 @@ public class PersonServiceImpl implements PersonService {
      * http://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html
      *
      * Oppgave 2:
-     * Dersom personen er etterlyst, kall PoliceService.alert(...) og returner personobjektet uten å oppdatere adressen (litt snålt, men gjør det for eksempelets skyld)
+     * Dersom personen er etterlyst, kall PoliceRepository.alert(...) og returner personobjektet uten å oppdatere adressen (litt snålt, men gjør det for eksempelets skyld)
      * Dersom personen ikke er etterlyst, oppdater personen med adressen og kall personRepository.save(person)
      *
      * Oppgave 3:
@@ -43,7 +43,7 @@ public class PersonServiceImpl implements PersonService {
     public Person save(Person person) {
         FolkeregisterAddress folkeregisterAddress = folkeregisterRepository.getAddress(person.getFnr());
         if (folkeregisterAddress.isEttersoktAvPolitiet()) {
-            policeService.alert(person.getFnr());
+            policeRepository.alert(person.getFnr());
             return person;
         } else {
             person.setAddress(new Address(
@@ -62,7 +62,7 @@ public class PersonServiceImpl implements PersonService {
         this.personRepository = personRepository;
     }
 
-    public void setPoliceService(PoliceService policeService) {
-        this.policeService = policeService;
+    public void setPoliceRepository(PoliceRepository policeRepository) {
+        this.policeRepository = policeRepository;
     }
 }

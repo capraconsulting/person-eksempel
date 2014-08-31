@@ -1,5 +1,5 @@
 package no.capra.person.repository;
 
-public interface PoliceService {
+public interface PoliceRepository {
     void alert(long fnr);
 }

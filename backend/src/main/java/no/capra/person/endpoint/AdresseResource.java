@@ -18,7 +18,7 @@ public class AdresseResource {
     public ResponseEntity<DSFAdresse> get(@PathVariable String id) {
         Long longId = Long.valueOf(id);
         if (longId < 10000000000L) {
-            return new ResponseEntity<DSFAdresse>(new DSFAdresse("Nedre Møllenbergsgt 22", "7014", "Trondheim", false), HttpStatus.OK);
+            return new ResponseEntity<DSFAdresse>(new DSFAdresse("Leirfivelveien 17", "1346", "Gjettum", false), HttpStatus.OK);
         } else if (longId < 20000000000L) {
             return new ResponseEntity<DSFAdresse>(new DSFAdresse("Claude Monets gate 22", "1337", "Sandvika", true), HttpStatus.OK);
         }

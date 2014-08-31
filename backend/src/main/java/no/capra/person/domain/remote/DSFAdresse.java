@@ -6,11 +6,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class DSFAdresse {
 
     private String gate, postnummer, poststed;
+    private boolean ettersoktAvPolitiet;
 
-    public DSFAdresse(String gate, String postnummer, String poststed) {
+    public DSFAdresse() {
+        gate = postnummer = poststed = "";
+    }
+
+    public DSFAdresse(String gate, String postnummer, String poststed, boolean ettersoktAvPolitiet) {
         this.gate = gate;
         this.postnummer = postnummer;
         this.poststed = poststed;
+        this.ettersoktAvPolitiet = ettersoktAvPolitiet;
     }
 
     public String getGate() {
@@ -23,5 +29,9 @@ public class DSFAdresse {
 
     public String getPoststed() {
         return poststed;
+    }
+
+    public boolean isEttersoktAvPolitiet() {
+        return ettersoktAvPolitiet;
     }
 }

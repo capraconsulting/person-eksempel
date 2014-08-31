@@ -6,6 +6,8 @@ import no.capra.person.repository.PersonRepository;
 import java.util.List;
 
 public class PersonRepositoryMock implements PersonRepository {
+    private boolean saveWasInvoked;
+
     @Override
     public Person findById(String id) {
         throw new UnsupportedOperationException("Ikke implementert");
@@ -18,6 +20,7 @@ public class PersonRepositoryMock implements PersonRepository {
 
     @Override
     public Person save(Person person) {
+        saveWasInvoked = true;
         return person;
     }
 
@@ -29,5 +32,9 @@ public class PersonRepositoryMock implements PersonRepository {
     @Override
     public void deleteAll() {
         throw new UnsupportedOperationException("Ikke implementert");
+    }
+
+    public boolean saveWasInvoked() {
+        return saveWasInvoked;
     }
 }

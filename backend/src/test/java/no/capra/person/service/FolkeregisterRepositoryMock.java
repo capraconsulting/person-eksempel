@@ -1,21 +1,22 @@
 package no.capra.person.service;
 
-import no.capra.person.repository.DSFAddress;
+import no.capra.person.repository.FolkeregisterAddress;
 import no.capra.person.repository.FolkeregisterRepository;
 
 public class FolkeregisterRepositoryMock implements FolkeregisterRepository {
 
-    private boolean osloResident;
+    private boolean wanted;
 
-    public DSFAddress getAddress(long fnr) {
-        DSFAddress address = new DSFAddress();
+    public FolkeregisterAddress getAddress(long fnr) {
+        FolkeregisterAddress address = new FolkeregisterAddress();
         address.setGate("testgate");
         address.setPostnummer("0101");
-        address.setPoststed(osloResident ? "Oslo" : "Tønsberg");
+        address.setPoststed("Oslo");
+        address.setEttersoktAvPolitiet(wanted);
         return address;
     }
 
-    public void setOsloResident(boolean osloResident) {
-        this.osloResident = osloResident;
+    public void setWanted(boolean wanted) {
+        this.wanted = wanted;
     }
 }

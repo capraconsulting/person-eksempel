@@ -1,8 +1,9 @@
 package no.capra.person.repository;
 
-public class DSFAddress {
+public class FolkeregisterAddress {
 
     private String gate, postnummer, poststed;
+    private boolean ettersoktAvPolitiet;
 
     public String getGate() {
         return gate;
@@ -26,5 +27,13 @@ public class DSFAddress {
 
     public void setPoststed(String poststed) {
         this.poststed = poststed;
+    }
+
+    public boolean isEttersoktAvPolitiet() {
+        return ettersoktAvPolitiet;
+    }
+
+    public void setEttersoktAvPolitiet(boolean ettersoktAvPolitiet) {
+        this.ettersoktAvPolitiet = ettersoktAvPolitiet;
     }
 }

@@ -6,8 +6,8 @@ import org.springframework.web.client.RestTemplate;
 @Repository
 public class FolkeregisterRepositoryImpl implements FolkeregisterRepository {
 
-    public DSFAddress getAddress(long fnr) {
-        return new RestTemplate().getForObject("http://localhost:8080/rest/dsf/1", DSFAddress.class);
+    public FolkeregisterAddress getAddress(long fnr) {
+        return new RestTemplate().getForObject("http://localhost:8080/rest/dsf/" + fnr, FolkeregisterAddress.class);
     }
 
 }

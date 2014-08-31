@@ -41,9 +41,6 @@ public class PersonServiceImpl implements PersonService {
      */
     @Override
     public Person save(Person person) {
-        // kall mot DSF (Det Sentrale Folkeregisteret) for å hente adresse. Tjenesten kalles slik /dsf/{fødselsnr}
-        // oppdater person-objektet med adressen dersom personen bor i Norge
-
         FolkeregisterAddress folkeregisterAddress = folkeregisterRepository.getAddress(person.getFnr());
         if (folkeregisterAddress.isEttersoktAvPolitiet()) {
             policeService.alert(person.getFnr());
@@ -55,10 +52,6 @@ public class PersonServiceImpl implements PersonService {
                     folkeregisterAddress.getPostnummer()));
             return personRepository.save(person);
         }
-    }
-
-    private boolean addressFound(FolkeregisterAddress folkeregisterAddress) {
-        return !(folkeregisterAddress.getGate().isEmpty() && folkeregisterAddress.getPostnummer().isEmpty() && folkeregisterAddress.getPoststed().isEmpty());
     }
 
     public void setFolkeregisterRepository(FolkeregisterRepository folkeregisterRepository) {
